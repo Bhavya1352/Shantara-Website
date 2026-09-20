@@ -1,12 +1,24 @@
-import { useEffect } from 'react'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion'
 import Button from '../components/Button'
-import Pattern from '../components/Pattern'
 import { useContactModal } from '../hooks/useContactModal'
 
 const ease = [0.22, 1, 0.36, 1]
 
+const HERO_IMAGES = [
+  { src: '/img/hero-lobby.jpg',            alt: 'A sunlit Shantara lounge overlooking the Kerala hills' },
+  { src: '/img/retreat-exterior-dusk.jpg', alt: 'Shantara retreat at dusk, Kerala hilltop' },
+  { src: '/img/retreat-lawn.jpg',          alt: 'Shantara retreat lawn and gardens' },
+  { src: '/img/lounge-nature.jpg',         alt: 'A quiet lounge space opening onto nature' },
+]
+
 export default function Hero({ isLoaded = true }) {
+  const [imgIndex, setImgIndex] = useState(0)
+
+  useEffect(() => {
+    const id = setInterval(() => setImgIndex((i) => (i + 1) % HERO_IMAGES.length), 4000)
+    return () => clearInterval(id)
+  }, [])
   const { openContactModal } = useContactModal()
 
   // Mouse parallax setup
@@ -20,9 +32,9 @@ export default function Hero({ isLoaded = true }) {
   const bgX = useTransform(springX, [-0.5, 0.5], ['-1.5%', '1.5%'])
   const bgY = useTransform(springY, [-0.5, 0.5], ['-1.5%', '1.5%'])
 
-  // Foreground pattern inverse shift
-  const patternX = useTransform(springX, [-0.5, 0.5], ['2%', '-2%'])
-  const patternY = useTransform(springY, [-0.5, 0.5], ['2%', '-2%'])
+  // 3D tilt
+  const rotateY = useTransform(springX, [-0.5, 0.5], [-12, 12])
+  const rotateX = useTransform(springY, [-0.5, 0.5], [8, -8])
 
   useEffect(() => {
     const isFine = window.matchMedia('(pointer: fine)').matches
@@ -45,35 +57,30 @@ export default function Hero({ isLoaded = true }) {
       className="relative flex h-screen w-full items-end overflow-hidden bg-pine-deep grain-overlay-dark"
       data-cursor="explore"
     >
-      {/* Parallax Background Photography */}
+      {/* Parallax Background Photography — auto-cycling slideshow */}
       <motion.div
         className="absolute inset-[-4%] min-h-[108%] w-[108%]"
-        style={{ x: bgX, y: bgY }}
+        style={{ x: bgX, y: bgY, rotateX, rotateY, transformPerspective: 900, transformStyle: 'preserve-3d' }}
       >
-        <motion.img
-          src="/img/hero-lobby.jpg"
-          alt="A sunlit Shantara lounge overlooking the Kerala hills, framed by floor-to-ceiling glass"
-          className="h-full w-full object-cover object-center photo-graded"
-          initial={{ scale: 1.12, opacity: 0.85 }}
-          animate={isLoaded ? { scale: 1, opacity: 1 } : { scale: 1.12, opacity: 0.85 }}
-          transition={{ duration: 2.2, ease }}
-        />
+        <AnimatePresence mode="sync">
+          <motion.img
+            key={imgIndex}
+            src={HERO_IMAGES[imgIndex].src}
+            alt={HERO_IMAGES[imgIndex].alt}
+            className="absolute inset-0 h-full w-full object-cover object-center photo-graded"
+            initial={{ opacity: 0, scale: 1.08 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.03 }}
+            transition={{ duration: 1.6, ease }}
+          />
+        </AnimatePresence>
       </motion.div>
 
       {/* Atmospheric Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-t from-pine-deep/95 via-pine-deep/45 to-pine-deep/25 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-pine-deep/70 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-pine-deep via-pine-deep/65 to-pine-deep/30 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-pine-deep/80 via-transparent to-transparent pointer-events-none" />
 
-      {/* Ambient Parallax Brand Pattern */}
-      <motion.div
-        className="absolute -right-20 top-0 h-[65%] w-[42%] hidden xs:block pointer-events-none"
-        style={{ x: patternX, y: patternY }}
-      >
-        <Pattern
-          className="h-full w-full opacity-[0.11]"
-          color="#F5F1E6"
-        />
-      </motion.div>
+
 
       {/* Hero Content Container */}
       <div className="container-shantara relative z-10 w-full pb-20 pt-32 md:pb-28 md:pt-40">

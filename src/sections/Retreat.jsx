@@ -17,12 +17,13 @@ export default function Retreat() {
 
           <Reveal
             delay={0.25}
-            className="relative z-10 mx-4 -mt-8 bg-cream-warm/95 p-6 shadow-[0_24px_64px_-24px_rgba(33,31,24,0.18)] backdrop-blur-sm sm:mx-8 sm:-mt-10 sm:p-8 md:absolute md:left-8 md:right-8 md:-mt-12 md:max-w-md md:p-9 lg:static lg:mx-0 lg:-mt-14 lg:max-w-sm lg:p-10 border border-stone-line/50"
+            className="relative z-10 mx-4 -mt-8 bg-cream-warm/95 p-7 shadow-[0_20px_72px_-8px_rgba(60,74,30,0.22),0_4px_16px_-4px_rgba(33,31,24,0.10)] backdrop-blur-sm sm:mx-8 sm:-mt-10 sm:p-9 md:absolute md:left-8 md:right-8 md:-mt-12 md:max-w-md md:p-10 lg:static lg:mx-0 lg:-mt-14 lg:max-w-sm lg:p-11 border border-stone-line/50"
           >
             <div className="flex items-baseline gap-4">
               <span className="font-display text-[2.4rem] font-light leading-none text-pine sm:text-[3rem] font-figures">52</span>
               <span className="max-w-[8rem] text-[0.82rem] leading-snug text-ink-soft">Premium rooms, thoughtfully designed</span>
             </div>
+            <hr className="my-4 border-t border-stone-line" />
             <div className="flex items-baseline gap-4">
               <span className="font-display text-[2.4rem] font-light leading-none text-pine sm:text-[3rem] font-figures">56K</span>
               <span className="max-w-[8rem] text-[0.82rem] leading-snug text-ink-soft">Sq ft of clinical &amp; wellness facilities</span>

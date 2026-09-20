@@ -7,7 +7,7 @@ export default function FinalCTA() {
   const { openContactModal } = useContactModal()
 
   return (
-    <section id="final-cta" className="relative overflow-hidden bg-pine-deep text-cream-warm py-24 md:py-36 grain-overlay-dark">
+    <section id="final-cta" className="relative overflow-hidden bg-pine-deep text-cream-warm py-14 md:py-20 grain-overlay-dark">
       <Pattern className="absolute -bottom-20 -left-20 h-64 w-64 opacity-[0.08] md:h-80 md:w-80 pointer-events-none" color="#F5F1E6" />
       <Pattern className="absolute -right-16 -top-16 h-48 w-48 opacity-[0.06] md:h-64 md:w-64 pointer-events-none" color="#F5F1E6" />
 
