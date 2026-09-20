@@ -1,4 +1,8 @@
+import { useEffect } from 'react'
 import useLenis from './hooks/useLenis'
+import ContactProvider from './context/ContactProvider'
+import CustomCursor from './components/CustomCursor'
+import ContactModal from './components/ContactModal'
 import Navbar from './components/Navbar'
 import Hero from './sections/Hero'
 import Introduction from './sections/Introduction'
@@ -14,21 +18,42 @@ import Footer from './sections/Footer'
 export default function App() {
   useLenis()
 
+  // Handle hash scroll after page load to prevent auto-scroll on reload
+  useEffect(() => {
+    if (window.location.hash) {
+      window.history.replaceState(null, null, ' ')
+      window.scrollTo(0, 0)
+    }
+  }, [])
+
   return (
-    <div className="relative w-full">
-      <Navbar />
-      <main>
-        <Hero />
-        <Introduction />
-        <Legacy />
-        <Retreat />
-        <HealingJourney />
-        <HealingGoals />
-        <Programs />
-        <Experience />
-        <FinalCTA />
-      </main>
-      <Footer />
-    </div>
+    <ContactProvider>
+      <div className="relative w-full min-h-screen bg-cream text-ink">
+        {/* Fine pointer custom cursor */}
+        <CustomCursor />
+
+        {/* Global Contact & Intake Modal */}
+        <ContactModal />
+
+        {/* Fixed Navigation */}
+        <Navbar />
+
+        {/* Main Content */}
+        <main>
+          <Hero isLoaded={true} />
+          <Introduction />
+          <Legacy />
+          <Retreat />
+          <HealingJourney />
+          <HealingGoals />
+          <Programs />
+          <Experience />
+          <FinalCTA />
+        </main>
+
+        {/* Footer */}
+        <Footer />
+      </div>
+    </ContactProvider>
   )
 }

@@ -1,4 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-  <rect width="48" height="48" fill="#3C4A1E"/>
-  <text x="24" y="32" font-family="Georgia, serif" font-size="26" font-style="italic" fill="#F5F1E6" text-anchor="middle">S</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <rect width="48" height="48" rx="8" fill="#293312"/>
+  <defs>
+    <radialGradient id="fav-center" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#C6A66C" stop-opacity="1"/>
+      <stop offset="70%" stop-color="#AD8A4E" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#AD8A4E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g transform="translate(24, 24) scale(0.38)">
+    <path d="M 0 -3 C -7 -10, -13 -26, -9 -38 C -6 -47, 5 -47, 9 -40 C 13 -32, 9 -14, 0 -3 Z" fill="#F5F1E6" transform="rotate(0)"/>
+    <path d="M 0 -3 C -7 -10, -13 -26, -9 -38 C -6 -47, 5 -47, 9 -40 C 13 -32, 9 -14, 0 -3 Z" fill="#F5F1E6" transform="rotate(72)"/>
+    <path d="M 0 -3 C -7 -10, -13 -26, -9 -38 C -6 -47, 5 -47, 9 -40 C 13 -32, 9 -14, 0 -3 Z" fill="#F5F1E6" transform="rotate(144)"/>
+    <path d="M 0 -3 C -7 -10, -13 -26, -9 -38 C -6 -47, 5 -47, 9 -40 C 13 -32, 9 -14, 0 -3 Z" fill="#F5F1E6" transform="rotate(216)"/>
+    <path d="M 0 -3 C -7 -10, -13 -26, -9 -38 C -6 -47, 5 -47, 9 -40 C 13 -32, 9 -14, 0 -3 Z" fill="#F5F1E6" transform="rotate(288)"/>
+    <circle cx="0" cy="0" r="10" fill="url(#fav-center)"/>
+    <circle cx="0" cy="0" r="3.5" fill="#C6A66C"/>
+  </g>
 </svg>
