@@ -184,24 +184,4 @@ html {
   font-feature-settings: 'tnum' 1, 'lnum' 1;
 }
 
-/* Custom Cursor styling for fine pointers */
-@media (pointer: fine) {
-  body.custom-cursor-active,
-  body.custom-cursor-active a,
-  body.custom-cursor-active button,
-  body.custom-cursor-active [data-cursor] {
-    cursor: none !important;
-  }
-}
-
-.custom-cursor-dot {
-  pointer-events: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 99999;
-  border-radius: 9999px;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease;
-}
 

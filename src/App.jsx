@@ -1,9 +1,9 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import useLenis from './hooks/useLenis'
 import ContactProvider from './context/ContactProvider'
-import CustomCursor from './components/CustomCursor'
 import ContactModal from './components/ContactModal'
 import WelcomePopup from './components/WelcomePopup'
+import PasswordGate from './components/PasswordGate'
 import Navbar from './components/Navbar'
 import Hero from './sections/Hero'
 import Introduction from './sections/Introduction'
@@ -17,6 +17,17 @@ import FinalCTA from './sections/FinalCTA'
 import Footer from './sections/Footer'
 
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    try {
+      return (
+        sessionStorage.getItem('shantara_auth') === 'true' ||
+        localStorage.getItem('shantara_auth') === 'true'
+      )
+    } catch {
+      return false
+    }
+  })
+
   useLenis()
 
   // Handle hash scroll after page load to prevent auto-scroll on reload
@@ -27,12 +38,13 @@ export default function App() {
     }
   }, [])
 
+  if (!isAuthenticated) {
+    return <PasswordGate onAuthenticated={() => setIsAuthenticated(true)} />
+  }
+
   return (
     <ContactProvider>
       <div className="relative w-full min-h-screen bg-cream text-ink">
-        {/* Fine pointer custom cursor */}
-        <CustomCursor />
-
         {/* Global Contact & Intake Modal */}
         <ContactModal />
 
@@ -61,3 +73,4 @@ export default function App() {
     </ContactProvider>
   )
 }
+
