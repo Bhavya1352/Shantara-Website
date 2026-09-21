@@ -6,18 +6,24 @@ import { useContactModal } from '../hooks/useContactModal'
 const ease = [0.22, 1, 0.36, 1]
 
 const HERO_IMAGES = [
-  { src: '/img/hero-lobby.jpg',            alt: 'A sunlit Shantara lounge overlooking the Kerala hills' },
+  { src: '/img/hero-lobby.jpg', alt: 'A sunlit Shantara lounge overlooking the Kerala hills' },
   { src: '/img/retreat-exterior-dusk.jpg', alt: 'Shantara retreat at dusk, Kerala hilltop' },
-  { src: '/img/retreat-lawn.jpg',          alt: 'Shantara retreat lawn and gardens' },
-  { src: '/img/lounge-nature.jpg',         alt: 'A quiet lounge space opening onto nature' },
+  { src: '/img/retreat-lawn.jpg', alt: 'Shantara retreat lawn and gardens' },
+  { src: '/img/lounge-nature.jpg', alt: 'A quiet lounge space opening onto nature' },
 ]
 
 export default function Hero({ isLoaded = true }) {
   const [imgIndex, setImgIndex] = useState(0)
 
   useEffect(() => {
-    const id = setInterval(() => setImgIndex((i) => (i + 1) % HERO_IMAGES.length), 4000)
-    return () => clearInterval(id)
+    let intervalId
+    const timeoutId = setTimeout(() => {
+      intervalId = setInterval(() => setImgIndex((i) => (i + 1) % HERO_IMAGES.length), 4000)
+    }, 100)
+    return () => {
+      clearTimeout(timeoutId)
+      if (intervalId) clearInterval(intervalId)
+    }
   }, [])
   const { openContactModal } = useContactModal()
 
@@ -71,7 +77,7 @@ export default function Hero({ isLoaded = true }) {
             initial={{ opacity: 0, scale: 1.08 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.03 }}
-            transition={{ duration: 1.6, ease }}
+            transition={{ duration: 1.4, delay: 0.1, ease }}
           />
         </AnimatePresence>
       </motion.div>
