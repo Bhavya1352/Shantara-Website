@@ -18,7 +18,7 @@ export default function Hero({ isLoaded = true }) {
   useEffect(() => {
     let intervalId
     const timeoutId = setTimeout(() => {
-      intervalId = setInterval(() => setImgIndex((i) => (i + 1) % HERO_IMAGES.length), 4000)
+      intervalId = setInterval(() => setImgIndex((i) => (i + 1) % HERO_IMAGES.length), 2000)
     }, 100)
     return () => {
       clearTimeout(timeoutId)
@@ -77,7 +77,7 @@ export default function Hero({ isLoaded = true }) {
             initial={{ opacity: 0, scale: 1.08 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.03 }}
-            transition={{ duration: 1.4, delay: 0.1, ease }}
+            transition={{ duration: 0.7, delay: 0.05, ease }}
           />
         </AnimatePresence>
       </motion.div>

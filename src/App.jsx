@@ -3,6 +3,7 @@ import useLenis from './hooks/useLenis'
 import ContactProvider from './context/ContactProvider'
 import CustomCursor from './components/CustomCursor'
 import ContactModal from './components/ContactModal'
+import WelcomePopup from './components/WelcomePopup'
 import Navbar from './components/Navbar'
 import Hero from './sections/Hero'
 import Introduction from './sections/Introduction'
@@ -34,6 +35,9 @@ export default function App() {
 
         {/* Global Contact & Intake Modal */}
         <ContactModal />
+
+        {/* Brand Welcome Popup */}
+        <WelcomePopup />
 
         {/* Fixed Navigation */}
         <Navbar />
